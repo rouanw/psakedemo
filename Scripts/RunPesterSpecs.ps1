@@ -7,4 +7,4 @@ echo "Importing Pester"
 Import-Module Pester
 echo "Pester imported"
 Get-Module
-Invoke-Pester -OutputXml PesterTestResults.Xml
+Invoke-Pester -OutputXml PesterTestResults.xml
