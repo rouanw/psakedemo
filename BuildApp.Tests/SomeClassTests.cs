@@ -10,7 +10,7 @@ namespace BuildApp.Tests
         [TestMethod]
         public void ItIsTrue()
         {
-            true.Should().BeFalse("Cause I said so");
+            true.Should().BeTrue("Cause I said so");
         }
     }
 }
