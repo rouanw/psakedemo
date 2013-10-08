@@ -1,4 +1,5 @@
 ﻿using System;
+using BuildApp.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +11,8 @@ namespace BuildApp.Tests
         [TestMethod]
         public void ItIsTrue()
         {
-            true.Should().BeTrue("Cause I said so");
+            var something = new SomeClass();
+            something.SomeProperty.Should().BeTrue();
         }
     }
 }
