@@ -8,23 +8,23 @@ properties {
 task default -depends Test
 
 task Test -depends Compile {
-  MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage
+  Exec { MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage }
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
 task Compile -depends Package {
-  MsBuild BuildApp.sln /verbosity:minimal
+  Exec { MsBuild BuildApp.sln /verbosity:minimal }
   $compileMessage
 }
 
 task Package {
-	NuGet install BuildApp/packages.config -o packages
-	NuGet install BuildApp.Tests/packages.config -o packages
+	Exec { NuGet install BuildApp/packages.config -o packages }
+	Exec { NuGet install BuildApp.Tests/packages.config -o packages }
 	$packageMessage
 }
 
 task Clean {
-  MsBuild BuildApp.sln /target:Clean
+  Exec { MsBuild BuildApp.sln /target:Clean }
   $cleanMessage
 }
 
