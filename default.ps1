@@ -6,12 +6,12 @@ properties {
 
 task default -depends Test
 
-task Test -depends Compile, Clean {
+task Test -depends Compile {
   MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
-task Compile -depends Clean {
+task Compile {
   MsBuild BuildApp.sln
   $compileMessage
 }

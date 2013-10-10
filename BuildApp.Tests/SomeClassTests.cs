@@ -12,7 +12,7 @@ namespace BuildApp.Tests
         public void ItIsTrue()
         {
             var something = new SomeClass();
-            something.SomeProperty.Should().BeTrue();
+            something.SomeProperty.Should().BeFalse();
         }
     }
 }

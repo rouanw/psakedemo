@@ -66,3 +66,4 @@ packages/
 *.testsettings
 
 checkBookCoverImages/images_all
+TestResults/
