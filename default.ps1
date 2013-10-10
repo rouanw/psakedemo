@@ -7,12 +7,12 @@ properties {
 task default -depends Test
 
 task Test -depends Compile {
-  MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll
+  MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
 task Compile {
-  MsBuild BuildApp.sln
+  MsBuild BuildApp.sln /verbosity:minimal
   $compileMessage
 }
 

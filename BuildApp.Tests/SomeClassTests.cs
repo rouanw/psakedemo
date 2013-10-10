@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using BuildApp.Models;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +13,19 @@ namespace BuildApp.Tests
         public void ItIsTrue()
         {
             var something = new SomeClass();
-            something.SomeProperty.Should().BeFalse();
+            something.SomeProperty.Should().BeTrue();
+        }
+        
+        [TestMethod]
+        public void ItHasAdam()
+        {
+            new List<String>
+            {
+                "bob",
+                "john",
+                "andy",
+                "adam"
+            }.Should().Contain("adam");
         }
     }
 }
