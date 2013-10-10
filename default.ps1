@@ -4,17 +4,19 @@ properties {
   $packageMessage = 'Executed Package!'
   $cleanMessage = 'Executed Clean!'
   if ($env:NuGet) { $NuGet = $env:NuGet } else { $NuGet = "NuGet" }
+  if ($env:MsTest) { $MsTest = $env:MsTest } else { $MsTest = "MsTest" }
+  if ($env:MsBuild) { $MsBuild = $env:MsBuild } else { $MsBuild = "MsBuild" }
 }
 
 task default -depends Test
 
 task Test -depends Compile {
-  Exec { MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage }
+  Exec { Invoke-Expression "$MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage" }
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
 task Compile -depends Package {
-  Exec { MsBuild BuildApp.sln /verbosity:minimal }
+  Exec { Invoke-Expression "$MsBuild BuildApp.sln /verbosity:minimal" }
   $compileMessage
 }
 
@@ -25,7 +27,7 @@ task Package {
 }
 
 task Clean {
-  Exec { MsBuild BuildApp.sln /target:Clean }
+  Exec { Invoke-Expression "$MsBuild BuildApp.sln /target:Clean /verbosity:minimal" }
   $cleanMessage
 }
 
