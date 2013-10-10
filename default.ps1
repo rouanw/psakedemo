@@ -1,6 +1,7 @@
 properties {
   $testMessage = 'Executed Test!'
   $compileMessage = 'Executed Compile!'
+  $packageMessage = 'Executed Package!'
   $cleanMessage = 'Executed Clean!'
 }
 
@@ -11,9 +12,15 @@ task Test -depends Compile {
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
-task Compile {
+task Compile -depends Package {
   MsBuild BuildApp.sln /verbosity:minimal
   $compileMessage
+}
+
+task Package {
+	NuGet install BuildApp/packages.config -o packages
+	NuGet install BuildApp.Tests/packages.config -o packages
+	$packageMessage
 }
 
 task Clean {
