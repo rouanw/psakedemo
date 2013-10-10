@@ -3,6 +3,7 @@ properties {
   $compileMessage = 'Executed Compile!'
   $packageMessage = 'Executed Package!'
   $cleanMessage = 'Executed Clean!'
+  if ($env:NuGet) { $NuGet = $env:NuGet } else { $NuGet = "NuGet" }
 }
 
 task default -depends Test
@@ -18,9 +19,9 @@ task Compile -depends Package {
 }
 
 task Package {
-	Exec { NuGet install BuildApp/packages.config -o packages }
-	Exec { NuGet install BuildApp.Tests/packages.config -o packages }
-	$packageMessage
+	Exec { Invoke-Expression "$NuGet install BuildApp/packages.config -o packages" }
+	Exec { Invoke-Expression "$NuGet install BuildApp.Tests/packages.config -o packages" }
+	$packagesMessage
 }
 
 task Clean {
