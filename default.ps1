@@ -11,12 +11,12 @@ properties {
 task default -depends Test
 
 task Test -depends Compile {
-  Exec { Invoke-Expression "& '$MsTest' /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage" }
+  Exec { Invoke-Expression "& '$MsTest' /TestContainer:BuildApp.Tests/bin/Release/BuildApp.Tests.dll /detail:errormessage" }
   # Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
 task Compile -depends Package {
-  Exec { Invoke-Expression "$MsBuild BuildApp.sln /verbosity:minimal" }
+  Exec { Invoke-Expression "$MsBuild BuildApp.sln /verbosity:minimal /p:Configuration=Release /p:OutputPath=bin\Release" }
   $compileMessage
 }
 
