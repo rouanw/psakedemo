@@ -11,8 +11,7 @@ properties {
 task default -depends Test
 
 task Test -depends Compile {
-  echo $MsTest
-  Exec { Invoke-Expression "$MsTest /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage" }
+  Exec { Invoke-Expression "& '$MsTest' /TestContainer:BuildApp.Tests/bin/Debug/BuildApp.Tests.dll /detail:errormessage" }
   Exec { Scripts/RunPesterSpecs.ps1 }
 }
 
